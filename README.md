@@ -58,5 +58,5 @@ The goal of this project is to develop a simple and efficient task management ap
 
 - GitHub     : [https://github.com/Madhan-03]  
 - LinkedIn   : [https://www.linkedin.com/in/madhan-kumar-128644362/] 
-- Portfolio  : [https://github.com/Madhan-03/portfolio]
+- Portfolio  : [https://madhan-03.github.io/portfolio/]
 ---
