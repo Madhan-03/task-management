@@ -6,8 +6,8 @@ It provides an interactive interface for users to create, update, delete, and ma
 
 ---
 
-🔗 **Live Demo   :** [Add Your Live Demo Link]  
-🔗 **GitHub Repo :** [Add Your GitHub Repository Link]
+🔗 **Live Demo   :** [https://madhan-03.github.io/task-management/]  
+🔗 **GitHub Repo :** [https://github.com/Madhan-03/task-management/]
 
 ---
 
@@ -56,7 +56,7 @@ The goal of this project is to develop a simple and efficient task management ap
 
 **Madhan Kumar**
 
-- GitHub    : [https://github.com/Madhan-03]  
-- LinkedIn  : [https://www.linkedin.com/in/madhan-kumar-128644362/] 
-- Portfolio  : [https://madhan-03.netlify.app/]
+- GitHub     : [https://github.com/Madhan-03]  
+- LinkedIn   : [https://www.linkedin.com/in/madhan-kumar-128644362/] 
+- Portfolio  : [https://github.com/Madhan-03/portfolio]
 ---
