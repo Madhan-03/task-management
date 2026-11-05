@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Management System</title>
+    <link rel="icon" href="./Logo/Logo.png" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- ============ AUTH SCREEN ============ -->
+    <div id="auth-screen" class="auth-screen">
+      <div class="auth-container">
+        <!-- Left brand panel -->
+        <aside class="auth-brand">
+          <div class="brand-mark">
+            <div class="brand-logo">✓</div>
+            <span>TaskManager</span>
+          </div>
+          <div class="brand-copy">
+            <h1>Organize your work.<br />Ship with clarity.</h1>
+            <p>
+              The professional task management platform for teams and
+              individuals who care about execution.
+            </p>
+          </div>
+          <ul class="brand-features">
+            <li>
+              <span class="feat-check">✓</span>
+              Real-time dashboard with productivity analytics
+            </li>
+            <li>
+              <span class="feat-check">✓</span>
+              Priority & status tracking with due dates
+            </li>
+            <li>
+              <span class="feat-check">✓</span>
+              Export reports as CSV or PDF
+            </li>
+          </ul>
+          <div class="brand-footer">
+            <div class="brand-testimonial">
+              <p>"Finally a task manager that just works."</p>
+              <span>— Product teams worldwide</span>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right form panel -->
+        <main class="auth-form-panel">
+          <div class="auth-form-inner">
+            <div class="auth-mobile-logo">
+              <div class="brand-logo">✓</div>
+              <span>TaskManager</span>
+            </div>
+
+            <h2 id="auth-title">Welcome back</h2>
+            <p class="auth-sub" id="auth-sub">Sign in to your workspace</p>
+
+            <form id="auth-form" novalidate>
+              <div class="form-field">
+                <label for="auth-username">Username</label>
+                <input
+                  id="auth-username"
+                  placeholder="Enter your username"
+                  required
+                  autocomplete="username"
+                />
+              </div>
+              <div class="form-field" id="email-group" style="display: none">
+                <label for="auth-email">Email</label>
+                <input
+                  id="auth-email"
+                  type="email"
+                  placeholder="you@company.com"
+                  autocomplete="email"
+                />
+              </div>
+              <div class="form-field">
+                <label for="auth-password">Password</label>
+                <input
+                  id="auth-password"
+                  type="password"
+                  placeholder="Enter your password"
+                  required
+                  minlength="6"
+                  autocomplete="current-password"
+                />
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-block"
+                id="auth-submit"
+              >
+                Sign in
+              </button>
+            </form>
+
+            <div id="auth-error" class="auth-error"></div>
+
+            <p class="auth-toggle">
+              <span id="auth-toggle-text">Don't have an account?</span>
+              <a href="#" id="auth-toggle-link">Create one</a>
+            </p>
+
+            <p class="auth-legal">
+              By continuing, you agree to our
+              <a href="#" id="open-terms">Terms</a> and
+              <a href="#" id="open-privacy">Privacy Policy</a>.
+            </p>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- ============ MAIN APP ============ -->
+    <div id="app" class="app" style="display: none">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="brand-logo">✓</div>
+          <span class="sidebar-brand">TaskManager</span>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a data-nav="dashboard" class="side-link active">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="3" width="7" height="9" rx="1" />
+              <rect x="14" y="3" width="7" height="5" rx="1" />
+              <rect x="14" y="12" width="7" height="9" rx="1" />
+              <rect x="3" y="16" width="7" height="5" rx="1" />
+            </svg>
+            <span>Dashboard</span>
+          </a>
+          <a data-nav="tasks" class="side-link">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M9 11l3 3L22 4" />
+              <path
+                d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+              />
+            </svg>
+            <span>My Tasks</span>
+          </a>
+          <a data-nav="new" class="side-link">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+            <span>New Task</span>
+          </a>
+          <a data-nav="reports" class="side-link">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M3 3v18h18" />
+              <path d="M18 17V9" />
+              <path d="M13 17V5" />
+              <path d="M8 17v-3" />
+            </svg>
+            <span>Reports</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="user-card">
+            <div class="user-avatar" id="user-avatar">U</div>
+            <div class="user-info">
+              <span class="user-name" id="nav-username"></span>
+              <span class="user-role">Workspace member</span>
+            </div>
+            <button class="icon-btn" id="logout-btn" title="Sign out">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <polyline points="16 17 21 12 16 7" />
+                <line x1="21" y1="12" x2="9" y2="12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Mobile overlay -->
+      <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+      <!-- Main content -->
+      <div class="content">
+        <!-- Top bar -->
+        <header class="topbar">
+          <button class="icon-btn mobile-toggle" id="nav-toggle">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+          <div class="topbar-title" id="topbar-title">Dashboard</div>
+          <div class="topbar-actions">
+            <button
+              class="icon-btn notif-bell"
+              id="notif-bell"
+              title="Notifications"
+              aria-label="Notifications"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+            </button>
+            <button class="btn btn-primary btn-sm" data-nav="new">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                width="14"
+                height="14"
+                style="vertical-align: -2px; margin-right: 4px"
+              >
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              New Task
+            </button>
+          </div>
+        </header>
+
+        <div id="flash-container"></div>
+
+        <main class="main-content">
+          <!-- DASHBOARD VIEW -->
+          <section class="view" id="view-dashboard">
+            <div class="view-header">
+              <div>
+                <h1>Dashboard</h1>
+                <p class="view-sub">
+                  Here's what's happening in your workspace today.
+                </p>
+              </div>
+            </div>
+
+            <div class="stats-grid" id="dash-stats"></div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <h2>Recent Tasks</h2>
+                <a data-nav="tasks" class="link-muted">View all →</a>
+              </div>
+              <div id="dash-recent"></div>
+            </div>
+          </section>
+
+          <!-- TASKS VIEW -->
+          <section class="view" id="view-tasks" style="display: none">
+            <div class="view-header">
+              <div>
+                <h1>My Tasks</h1>
+                <p class="view-sub">Manage, filter and prioritize your work.</p>
+              </div>
+              <button class="btn btn-primary" data-nav="new">+ New Task</button>
+            </div>
+
+            <div class="filters">
+              <div class="filter-search">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  width="16"
+                  height="16"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.35-4.35" />
+                </svg>
+                <input id="filter-search" placeholder="Search tasks…" />
+              </div>
+              <select id="filter-status">
+                <option value="">All statuses</option>
+                <option>Pending</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+              </select>
+              <select id="filter-priority">
+                <option value="">All priorities</option>
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+              </select>
+              <button class="btn btn-secondary" id="filter-clear">Clear</button>
+            </div>
+
+            <div id="tasks-list"></div>
+          </section>
+
+          <!-- FORM VIEW -->
+          <section class="view" id="view-new" style="display: none">
+            <div class="view-header">
+              <div>
+                <h1 id="form-title">New Task</h1>
+                <p class="view-sub">
+                  Fill in the details below to create a task.
+                </p>
+              </div>
+            </div>
+            <div class="form-card">
+              <form id="task-form">
+                <input type="hidden" id="task-id" />
+                <div class="form-field">
+                  <label>Title *</label>
+                  <input
+                    id="task-title"
+                    required
+                    maxlength="200"
+                    placeholder="e.g. Review Q4 report"
+                  />
+                </div>
+                <div class="form-field">
+                  <label>Description</label>
+                  <textarea
+                    id="task-desc"
+                    rows="4"
+                    placeholder="Add any additional details…"
+                  ></textarea>
+                </div>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label>Category</label>
+                    <input
+                      id="task-category"
+                      value="General"
+                      placeholder="e.g. Marketing"
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label>Due Date</label>
+                    <input id="task-due" type="date" />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label>Priority</label>
+                    <select id="task-priority">
+                      <option>Low</option>
+                      <option selected>Medium</option>
+                      <option>High</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label>Status</label>
+                    <select id="task-status">
+                      <option selected>Pending</option>
+                      <option>In Progress</option>
+                      <option>Completed</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-nav="tasks"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Save Task
+                  </button>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <!-- REPORTS VIEW -->
+          <section class="view" id="view-reports" style="display: none">
+            <div class="view-header">
+              <div>
+                <h1>Reports & Analytics</h1>
+                <p class="view-sub">
+                  Insights into your productivity and task distribution.
+                </p>
+              </div>
+              <div class="export-buttons">
+                <button class="btn btn-secondary" id="export-csv">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    width="14"
+                    height="14"
+                    style="vertical-align: -2px; margin-right: 4px"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Export CSV
+                </button>
+                <button class="btn btn-primary" id="export-pdf">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    width="14"
+                    height="14"
+                    style="vertical-align: -2px; margin-right: 4px"
+                  >
+                    <path
+                      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                    />
+                    <polyline points="14 2 14 8 20 8" />
+                  </svg>
+                  Export PDF
+                </button>
+              </div>
+            </div>
+            <div class="stats-grid" id="report-stats"></div>
+            <div class="report-grid" id="report-charts"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- Confirm dialog -->
+    <div id="modal-overlay" class="modal-overlay" style="display: none">
+      <div class="modal">
+        <h3 id="modal-title">Are you sure?</h3>
+        <p id="modal-msg">This action cannot be undone.</p>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" id="modal-cancel">Cancel</button>
+          <button class="btn btn-danger" id="modal-confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ TERMS MODAL ============ -->
+    <div id="terms-modal" class="legal-modal" style="display: none">
+      <div class="legal-modal-backdrop" data-close-legal></div>
+      <div
+        class="legal-modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="terms-title"
+      >
+        <header class="legal-header">
+          <div>
+            <span class="legal-eyebrow">Legal</span>
+            <h2 id="terms-title">Terms of Service</h2>
+            <p class="legal-updated">Last updated: November 2, 2026</p>
+          </div>
+          <button class="legal-close" data-close-legal aria-label="Close">
+            ✕
+          </button>
+        </header>
+        <div class="legal-body">
+          <section>
+            <h3>1. Acceptance of Terms</h3>
+            <p>
+              By creating an account or using TaskManager ("Service"), you agree
+              to be bound by these Terms of Service. If you do not agree, please
+              do not use the Service.
+            </p>
+          </section>
+          <section>
+            <h3>2. Your Account</h3>
+            <p>
+              You are responsible for maintaining the confidentiality of your
+              account credentials and for all activity under your account. You
+              must be at least 13 years old to use TaskManager. Notify us
+              immediately of any unauthorized use.
+            </p>
+          </section>
+          <section>
+            <h3>3. Acceptable Use</h3>
+            <p>You agree not to use the Service to:</p>
+            <ul>
+              <li>Violate any applicable law or regulation.</li>
+              <li>
+                Upload malicious code, spam, or content that infringes others'
+                rights.
+              </li>
+              <li>
+                Attempt to gain unauthorized access to the Service or other
+                users' accounts.
+              </li>
+              <li>Interfere with the operation or security of the Service.</li>
+            </ul>
+          </section>
+          <section>
+            <h3>4. Your Content</h3>
+            <p>
+              You retain ownership of the tasks, notes, and other content you
+              create. By using the Service, you grant us a limited license to
+              store, process, and display your content solely to operate and
+              improve the Service. We do not sell your content.
+            </p>
+          </section>
+          <section>
+            <h3>5. Availability & Changes</h3>
+            <p>
+              We may modify, suspend, or discontinue features at any time. We
+              aim for high availability but do not guarantee uninterrupted
+              service. We will make reasonable efforts to notify you of
+              significant changes.
+            </p>
+          </section>
+          <section>
+            <h3>6. Limitation of Liability</h3>
+            <p>
+              The Service is provided "as is" without warranties of any kind. To
+              the maximum extent permitted by law, we are not liable for
+              indirect, incidental, or consequential damages arising from your
+              use of the Service.
+            </p>
+          </section>
+          <section>
+            <h3>7. Termination</h3>
+            <p>
+              You may delete your account at any time. We may suspend or
+              terminate accounts that violate these Terms. Upon termination,
+              your data will be deleted in accordance with our Privacy Policy.
+            </p>
+          </section>
+          <section>
+            <h3>8. Contact</h3>
+            <p>
+              Questions about these Terms? Contact us at
+              <a href="mailto:legal@taskmanager.example"
+                >legal@taskmanager.example</a
+              >.
+            </p>
+          </section>
+        </div>
+        <footer class="legal-footer">
+          <button class="btn btn-primary" data-close-legal>Got it</button>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ============ PRIVACY MODAL ============ -->
+    <div id="privacy-modal" class="legal-modal" style="display: none">
+      <div class="legal-modal-backdrop" data-close-legal></div>
+      <div
+        class="legal-modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="privacy-title"
+      >
+        <header class="legal-header">
+          <div>
+            <span class="legal-eyebrow">Legal</span>
+            <h2 id="privacy-title">Privacy Policy</h2>
+            <p class="legal-updated">Last updated: November 5, 2025</p>
+          </div>
+          <button class="legal-close" data-close-legal aria-label="Close">
+            ✕
+          </button>
+        </header>
+        <div class="legal-body">
+          <section>
+            <h3>1. What We Collect</h3>
+            <p>We collect information you provide directly:</p>
+            <ul>
+              <li>
+                <strong>Account data</strong> — username, email address, and
+                password (stored securely).
+              </li>
+              <li>
+                <strong>Task content</strong> — titles, descriptions,
+                categories, due dates, and statuses you create.
+              </li>
+              <li>
+                <strong>Usage data</strong> — basic interaction data to keep the
+                Service working reliably.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h3>2. How We Use Your Data</h3>
+            <p>We use your data only to:</p>
+            <ul>
+              <li>Provide, maintain, and secure your account.</li>
+              <li>Display your tasks and generate reports you request.</li>
+              <li>Respond to support requests and improve the Service.</li>
+            </ul>
+          </section>
+          <section>
+            <h3>3. Storage & Security</h3>
+            <p>
+              Your data is stored on secure servers. Passwords are hashed — we
+              never store them in plain text. We use industry-standard
+              protections, but no system is 100% secure; use a strong, unique
+              password.
+            </p>
+          </section>
+          <section>
+            <h3>4. Sharing</h3>
+            <p>
+              We do <strong>not</strong> sell your personal information. We
+              share data only with:
+            </p>
+            <ul>
+              <li>
+                Service providers that help us operate (e.g., hosting), bound by
+                confidentiality.
+              </li>
+              <li>Authorities, when required by law.</li>
+            </ul>
+          </section>
+          <section>
+            <h3>5. Your Rights</h3>
+            <p>
+              You can access, update, export, or delete your data at any time
+              from within the app. You may also email us to request account
+              deletion. We respond within 30 days.
+            </p>
+          </section>
+          <section>
+            <h3>6. Cookies & Local Storage</h3>
+            <p>
+              We use <strong>localStorage</strong> in your browser to keep you
+              signed in and store your tasks locally. No third-party tracking
+              cookies are used.
+            </p>
+          </section>
+          <section>
+            <h3>7. Children's Privacy</h3>
+            <p>
+              The Service is not directed to children under 13. We do not
+              knowingly collect data from children. If you believe a child has
+              provided data, contact us and we will delete it.
+            </p>
+          </section>
+          <section>
+            <h3>8. Changes</h3>
+            <p>
+              We may update this Policy from time to time. Material changes will
+              be announced in-app. Continued use constitutes acceptance.
+            </p>
+          </section>
+          <section>
+            <h3>9. Contact</h3>
+            <p>
+              Privacy questions? Email
+              <a href="mailto:privacy@taskmanager.example"
+                >privacy@taskmanager.example</a
+              >.
+            </p>
+          </section>
+        </div>
+        <footer class="legal-footer">
+          <button class="btn btn-primary" data-close-legal>Got it</button>
+        </footer>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
